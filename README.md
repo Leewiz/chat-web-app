@@ -1,13 +1,20 @@
 # twitch-style chat web app
+----
+## project features
 
--------
-uses GRPC to communicate between services
-frontend will resemble twitch chat
-displays BTTV, FFZ, etc. twitch emotes inline with chat messages (likely using RESTful APIs from providers)
-- 
-users will be able to authenticate and login
-users will have a profile that they can manage (username, pfp, etc.)
+### general features
+- uses GRPC to communicate between services
+- frontend will resemble twitch chat
+- displays BTTV, FFZ, etc. twitch emotes inline with chat messages (likely using RESTful APIs from providers)
 
--------
-setup grpc with go
-replace one of the go clients with react frontend (using grpc-web)
+### backend features
+- users will be able to authenticate and login
+- users will have a profile that they can manage (username, pfp, etc.)
+
+----
+
+## development thoughts
+
+### tentative backlog
+- setup grpc with go
+- replace go client in `chat-app/` with react frontend (using grpc-web)
