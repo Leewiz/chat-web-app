@@ -1,5 +1,16 @@
 # twitch-style chat web app
 ----
+## usage
+### from the project's top-level directory
+- start the server
+  
+    ```$ go run server/main.go```
+- run the client (optionally provide a name)
+
+    ```$ go run chat-app/main.go --name leewiz```
+
+
+----
 ## project features
 
 ### general features
@@ -18,3 +29,4 @@
 ### tentative backlog
 - setup grpc with go
 - replace go client in `chat-app/` with react frontend (using grpc-web)
+
