@@ -1,20 +1,44 @@
 # twitch-style chat web app
 ----
+
 ## usage
 ### from the project's top-level directory
 - start the server
   
     ```$ go run server/main.go```
-- run the client (optionally provide a name)
 
-    ```$ go run chat-app/main.go --name leewiz```
+- the server must be running a proxy that exposes the services over grpc-web to the browser
+  - grpcwebproxy
 
-- to generate the grpc code
+    `$ grpcwebproxy --backend_addr=localhost:9090 --run_tls_server=false --allow_all_origins`
+
+- serve client files with an http server
+
+    ```$ python -m http.server 8081 &```
+
+- generate the grpc code
+  - golang server
 
     ```protoc --go_out=. --go_opt=paths=source_relative --go-grpc_out=. --go-grpc_opt=paths=source_relative proto/chat.proto```
 
+  - js client
+
+    ```protoc proto/chat.proto --js_out=import_style=commonjs:./chat-app --grpc-web_out=import_style=commonjs,mode=grpcwebtext:./chat-app```
 
 ----
+
+## making changes
+### frontend
+- changes to front-end will require rebuilding from the top level of the `chat-app` directory
+  
+  `$ set NODE_OPTIONS=--openssl-legacy-provider`
+
+  `$ npx webpack client.js`
+### backend
+- make code changes and start the server normally
+
+----
+
 ## project features
 
 ### general features
@@ -32,5 +56,5 @@
 
 ### tentative backlog
 - setup grpc with go
-- replace go client in `chat-app/` with react frontend (using grpc-web)
+- replace golang client in `chat-app/` js frontend (using grpc-web)
 

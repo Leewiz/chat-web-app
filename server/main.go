@@ -12,7 +12,7 @@ import (
 )
 
 var (
-	port = flag.Int("port", 50051, "The server port")
+	port = flag.Int("port", 9090, "The server port")
 )
 
 type server struct {
@@ -39,5 +39,6 @@ func (s *server) SayHello(ctx context.Context, in *pb.HelloRequest) (*pb.HelloRe
 }
 
 func (s *server) SayHelloAgain(ctx context.Context, in *pb.HelloRequest) (*pb.HelloReply, error) {
+	log.Printf("Received: %v", in.GetName())
 	return &pb.HelloReply{Message: "Hello again " + in.GetName()}, nil
 }
