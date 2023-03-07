@@ -7,11 +7,6 @@
   
     ```$ go run server/main.go```
 
-- the server must be running a proxy that exposes the services over grpc-web to the browser
-  - grpcwebproxy
-
-    `$ grpcwebproxy --backend_addr=localhost:9090 --run_tls_server=false --allow_all_origins`
-
 - serve client files with an http server
 
     ```$ python -m http.server 8081 &```
@@ -21,10 +16,15 @@
 
     ```$ protoc --go_out=. --go_opt=paths=source_relative --go-grpc_out=. --go-grpc_opt=paths=source_relative proto/chat.proto```
 
-  - js client
+  - typescript
+    - gerenate js code
+      - ```$ mkdir frontend/proto```
+      - ```$ protoc proto/chat.proto --js_out=import_style=commonjs:./frontend --grpc-web_out=import_style=commonjs,mode=grpcwebtext:./frontend```
 
-    ```$ protoc proto/chat.proto --js_out=import_style=commonjs:./chat-app --grpc-web_out=import_style=commonjs,mode=grpcwebtext:./chat-app```
-
+    - generate d.ts code
+      - ```$ cd frontend```
+      - ```$ npm install grpc_tools_node_protoc_ts --save-dev```
+      - ```$ npx grpc_tools_node_protoc.cmd --plugin=protoc-gen-ts=%CD%/node_modules/.bin/protoc-gen-ts.cmd --ts_out=grpc_js:./proto --js_out=import_style=commonjs:./proto --grpc_out=grpc_js:./proto -I ../proto ../proto/chat.proto```
 ----
 
 ## making changes
@@ -38,17 +38,6 @@
 - make code changes and start the server normally
 
 ----
-## notes for typescript frontend
-### GRPC notes
-- gerenate js code
-  - ```$ mkdir frontend/proto```
-  - ```$ protoc proto/chat.proto --js_out=import_style=commonjs:./frontend --grpc-web_out=import_style=commonjs,mode=grpcwebtext:./frontend```
-
-- generate d.ts code
-  - ```$ cd frontend```
-  - ```$ npm install grpc_tools_node_protoc_ts --save-dev```
-  - ```$ npx grpc_tools_node_protoc.cmd --plugin=protoc-gen-ts=%CD%/node_modules/.bin/protoc-gen-ts.cmd --ts_out=grpc_js:./proto --js_out=import_style=commonjs:./proto --grpc_out=grpc_js:./proto -I ../proto ../proto/chat.proto```
-
 ## project features
 
 ### general features
