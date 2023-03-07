@@ -19,11 +19,11 @@
 - generate the grpc code
   - golang server
 
-    ```protoc --go_out=. --go_opt=paths=source_relative --go-grpc_out=. --go-grpc_opt=paths=source_relative proto/chat.proto```
+    ```$ protoc --go_out=. --go_opt=paths=source_relative --go-grpc_out=. --go-grpc_opt=paths=source_relative proto/chat.proto```
 
   - js client
 
-    ```protoc proto/chat.proto --js_out=import_style=commonjs:./chat-app --grpc-web_out=import_style=commonjs,mode=grpcwebtext:./chat-app```
+    ```$ protoc proto/chat.proto --js_out=import_style=commonjs:./chat-app --grpc-web_out=import_style=commonjs,mode=grpcwebtext:./chat-app```
 
 ----
 
@@ -38,6 +38,16 @@
 - make code changes and start the server normally
 
 ----
+## notes for typescript frontend
+### GRPC notes
+- gerenate js code
+  - ```$ mkdir frontend/proto```
+  - ```$ protoc proto/chat.proto --js_out=import_style=commonjs:./frontend --grpc-web_out=import_style=commonjs,mode=grpcwebtext:./frontend```
+
+- generate d.ts code
+  - ```$ cd frontend```
+  - ```$ npm install grpc_tools_node_protoc_ts --save-dev```
+  - ```$ npx grpc_tools_node_protoc.cmd --plugin=protoc-gen-ts=%CD%/node_modules/.bin/protoc-gen-ts.cmd --ts_out=grpc_js:./proto --js_out=import_style=commonjs:./proto --grpc_out=grpc_js:./proto -I ../proto ../proto/chat.proto```
 
 ## project features
 
@@ -55,6 +65,7 @@
 ## development thoughts
 
 ### tentative backlog
-- setup grpc with go
-- replace golang client in `chat-app/` js frontend (using grpc-web)
+- build the chat interface
+- connect chat interface with backend
+
 
