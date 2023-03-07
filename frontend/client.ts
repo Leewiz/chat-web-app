@@ -9,14 +9,21 @@ const client = new ChatServiceClient(
 );
 
 const request = new HelloRequest();
-request.setName("world");
+request.setName("leewiz");
 
 client.sayHello(request, (error, response) => {
-    console.log("sending request...")
     if(!error) {
         console.info("Greeting:", response.getMessage());
     } else {
         console.error("Error:", error.message);
     }
 });
-console.info("done");
+
+request.setName("ashwiz");
+client.sayHelloAgain(request, (error, response) => {
+    if(!error) {
+        console.info("Another Greeting:", response.getMessage());
+    } else {
+        console.error("Error:", error.message);
+    }
+});
