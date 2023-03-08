@@ -1,7 +1,7 @@
 import * as grpc from "@grpc/grpc-js"
 
-import { HelloRequest, HelloReply } from "./proto/chat_pb"
-import { ChatServiceClient } from "./proto/chat_grpc_pb"
+import { HelloRequest, HelloReply } from "../proto/chat_pb"
+import { ChatServiceClient } from "../proto/chat_grpc_pb"
 
 const client = new ChatServiceClient(
     "localhost:9090",
